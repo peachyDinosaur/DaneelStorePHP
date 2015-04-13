@@ -25,8 +25,10 @@ class StoreTableGateway {
 
     public function getStoreById($storeId) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM stores WHE"
-                . "RE storeId = :storeId";
+        $sqlQuery = "SELECT * FROM stores "
+                . "WHERE storeId = :storeId";
+        
+        
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
@@ -41,6 +43,27 @@ class StoreTableGateway {
 
         return $statement;
     }
+    
+//    public function getStoreById($storeId) {
+//        // execute a query to get the user with the specified id
+//        $sqlQuery = "SELECT s.*, r.region AS region
+//                    FROM stores s
+//                    LEFT JOIN region r ON r.regionId = s.regionId
+//                    WHERE s.regionId = :regionId";
+//                   
+//        $statement = $this->connection->prepare($sqlQuery);
+//        $params = array(
+//            "regionId" => $storeId
+//        );
+//
+//        $status = $statement->execute($params);
+//
+//        if (!$status) {
+//            die("Could not find store");
+//        }
+//
+//        return $statement;
+//    }    
 
     public function insertStore($address, $manager, $phoneNumber, $regionId ) {
         $sqlQuery = "INSERT INTO stores " .
